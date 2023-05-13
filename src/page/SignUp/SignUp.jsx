@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import img from '../../assets/images/login/login.svg'
 import { Link } from 'react-router-dom';
 import { BsFacebook,BsLinkedin, BsGoogle } from "react-icons/bs";
+import { AuthContext } from '../../Provider/AuthProvider';
 
 const SignUp = () => {
+    const {createUser} = useContext(AuthContext)
     const handelSignUp = (e) =>{
         e.preventDefault()
         const from = e.target;
@@ -11,6 +13,13 @@ const SignUp = () => {
         const email = from.email.value
         const password = from.password.value;
         console.log(email,password);
+        createUser(email,password)
+        .then(result =>{
+            console.log(result.user);
+        })
+        .catch(error => {
+            console.log(error);
+        })
     }
     return (
         <div>
@@ -39,7 +48,7 @@ const SignUp = () => {
                                     <label className="label">
                                         <span className="label-text">Password</span>
                                     </label>
-                                    <input type="text" placeholder="password" name='password' className="input input-bordered" />
+                                    <input type="password" placeholder="password" name='password' className="input input-bordered" />
                                 </div>
                                 <div className="form-control mt-6">
                                     <button ></button>

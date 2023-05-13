@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import img from '../../assets/images/login/login.svg'
 import { Link } from 'react-router-dom';
 import { BsFacebook,BsLinkedin, BsGoogle } from "react-icons/bs";
+import { AuthContext } from '../../Provider/AuthProvider';
 const Login = () => {
+    const {signIn} = useContext(AuthContext)
 
     const handelLogin = (e) =>{
         e.preventDefault()
@@ -10,8 +12,14 @@ const Login = () => {
         const email = from.email.value
         const password = from.password.value;
         console.log(email,password);
+        signIn(email,password)
+        .then(result =>{
+            console.log(result.user);
+        })
+        .catch(error =>{
+            console.log(error);
+        })
     }
-
 
     return (
         <div>
@@ -34,7 +42,7 @@ const Login = () => {
                                     <label className="label">
                                         <span className="label-text">Password</span>
                                     </label>
-                                    <input type="text" placeholder="password" name='password' className="input input-bordered" />
+                                    <input type="password" placeholder="password" name='password' className="input input-bordered" />
                                     <label className="label">
                                         <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                                     </label>
