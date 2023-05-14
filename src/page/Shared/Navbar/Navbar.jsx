@@ -44,7 +44,10 @@ const Navbar = () => {
                     <Link>Blog</Link>
                     <Link>Contact</Link>
                     {
-                        user?.email?<Link onClick={handelLogOut}>Log Out</Link>:
+                        user?.email?<>
+                        <Link to='/bookings'>Bookings</Link>
+                        <Link onClick={handelLogOut}>Log Out</Link>
+                        </>:
                         <Link to='/login'>Login</Link>
                     }
                 </div>

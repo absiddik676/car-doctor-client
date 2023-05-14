@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import { BsFacebook,BsLinkedin, BsGoogle } from "react-icons/bs";
 import { AuthContext } from '../../Provider/AuthProvider';
 const Login = () => {
-    const {signIn} = useContext(AuthContext)
-
+    const {signIn,user} = useContext(AuthContext)
+    console.log(user);
     const handelLogin = (e) =>{
         e.preventDefault()
         const from = e.target;
