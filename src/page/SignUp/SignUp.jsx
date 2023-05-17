@@ -5,7 +5,7 @@ import { BsFacebook,BsLinkedin, BsGoogle } from "react-icons/bs";
 import { AuthContext } from '../../Provider/AuthProvider';
 
 const SignUp = () => {
-    const {createUser} = useContext(AuthContext)
+    const {createUser,googleSignIn} = useContext(AuthContext)
     const handelSignUp = (e) =>{
         e.preventDefault()
         const from = e.target;
@@ -18,6 +18,14 @@ const SignUp = () => {
             console.log(result.user);
         })
         .catch(error => {
+            console.log(error);
+        })
+    }
+
+    const handelGoogleLogin  = () =>{
+        googleSignIn()
+        .then(result => console.log(result))
+        .catch(error =>{
             console.log(error);
         })
     }
@@ -59,7 +67,7 @@ const SignUp = () => {
                             <div className='flex gap-4 text-2xl justify-center'>
                                 <BsFacebook className='text-blue-800'/>
                                 <BsLinkedin className='text-blue-500'/>
-                                <BsGoogle className='text-red-400'/>
+                                <button onClick={handelGoogleLogin}><BsGoogle className='text-red-400'/></button>
                             </div>
                             <p className='my-4 text-center'>Already have an account?  <Link to='/login' className='text-orange-500 font-semibold'>Login</Link></p>
                         </div>
